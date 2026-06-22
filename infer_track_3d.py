@@ -646,6 +646,8 @@ def dense_track_occupancy_grid(
             if cells.shape[0] == 0:
                 break
             batch_limit = int(seed_batch_size)
+            if batch_limit <= 0:
+                raise ValueError(f"seed_batch_size must be positive, got {seed_batch_size}")
             if max_tracks > 0:
                 remaining = int(max_tracks) - sum(int(s.shape[0]) for s in source_t_list)
                 if remaining <= 0:
